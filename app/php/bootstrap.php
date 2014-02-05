@@ -4,6 +4,7 @@ require __DIR__.'/../config.php';
 require __DIR__.'/Pimple.php';
 require __DIR__.'/TimeSource.php';
 require __DIR__.'/SiteRepository.php';
+require __DIR__.'/Site.php';
 require __DIR__.'/../vendor/autoload.php';
 
 

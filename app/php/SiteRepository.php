@@ -40,6 +40,16 @@ class SiteRepository {
 		return $this->db->lastInsertId();
 	}
 	
+	function loadSiteById($siteid) {
+		$stat = $this->db->prepare("SELECT * FROM site WHERE id=:id");
+		$stat->execute(array(
+				'id'=>$siteid,
+			));
+		if ($stat->rowCount() > 0) {
+			return new Site($stat->fetch());
+		}
+	}
+	
 }
 
 
