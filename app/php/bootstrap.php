@@ -6,6 +6,7 @@ require __DIR__.'/TimeSource.php';
 require __DIR__.'/SiteRepository.php';
 require __DIR__.'/Site.php';
 require __DIR__.'/QuestionAnswerRepository.php';
+require __DIR__.'/QuestionAnswer.php';
 require __DIR__.'/../vendor/autoload.php';
 
 /**

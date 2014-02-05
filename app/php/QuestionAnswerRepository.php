@@ -36,5 +36,15 @@ class QuestionAnswerRepository {
 		));
 	}
 	
+	public function loadForSite(Site $site) {
+		$stat = $this->db->prepare("SELECT * FROM question_answer WHERE site_id=:id ORDER BY answer_index ASC");
+		$stat->execute(array('id'=>$site->getId()));
+		$out = array();
+		while($data = $stat->fetch()) {
+			$out[] = new QuestionAnswer($data);
+		}
+		return $out;
+	}
+	
 }
 

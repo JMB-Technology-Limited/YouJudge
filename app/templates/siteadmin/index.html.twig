@@ -16,7 +16,12 @@
 				<th>&nbsp;</th>
 				<th>Answer</th>
 			</tr>
-
+			{% for answer in answers %}
+			<tr>
+				<td>{{ answer.answerIndex }}</td>
+				<td>{{ answer.answer }}</td>
+			</tr>
+			{% endfor %}
 			<tr>
 				<form action="newanswer.php?siteid={{ site.id }}" method="post">
 					<td>&nbsp;</td>

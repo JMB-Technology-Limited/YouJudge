@@ -15,7 +15,7 @@ if (!$site) {
 $params = array('site'=>$site);
 
 if ($site->getType() == 'answer') {
-	
+	$params['answers']= $app['questionanswerrepository']->loadForSite($site);
 }
 
 
