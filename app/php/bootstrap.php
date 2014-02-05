@@ -8,6 +8,10 @@ require __DIR__.'/Site.php';
 require __DIR__.'/QuestionAnswerRepository.php';
 require __DIR__.'/../vendor/autoload.php';
 
+/**
+ * @link https://github.com/JMB-Technology-Limited/CodeAPictureJudge
+ * @license https://raw.github.com/JMB-Technology-Limited/CodeAPictureJudge/master/LICENSE.txt BSD
+ */
 
 $app = new Pimple();
 
