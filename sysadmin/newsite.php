@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__.'/../../app/php/bootstrap.php';
+require __DIR__.'/../app/php/bootstrap.php';
 
 
 if (isset($_POST['title'])) {
@@ -17,7 +17,7 @@ if (isset($_POST['title'])) {
 		} else if ($type == 'versus') {
 			$id = $siteRepo->createVersusType($title,$question,$adminpassword);
 		}
-		header('Location: '.WEB_ROOT.'admin/site/index.php?siteid='.$id);
+		header('Location: '.WEB_ROOT.'siteadmin/index.php?siteid='.$id);
 		die();
 	}
 	
