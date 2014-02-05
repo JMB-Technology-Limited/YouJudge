@@ -1,0 +1,49 @@
+{% extends 'sysadmin/layout.html.twig' %}
+
+
+
+{% block content %}
+
+
+<form action="#" method="post">
+	
+	<div class="entry">
+		<label>
+			Title:
+			<input type="text" name="title">
+		</label>
+	</div>
+	
+	<div class="entry">
+		<label>
+			Type:
+			<select name="type">
+				<option value="answer">Users answer a question about 1 picture with one of several answeres you provide</option>
+				<option value="versus">Users answer a question by picking one of 2 pictues</option>
+			</select>
+		</label>
+	</div>
+	
+	<div class="entry">	
+		<label>
+			Question:
+			<input type="text" name="question">
+		</label>
+	</div>
+	
+	<div class="entry">		
+		<label>
+			Admin Password:
+			<input type="text" name="adminpassword">
+		</label>
+	</div>
+	
+	
+	<div class="actions">		
+		<input type="submit" value="create">
+	</div>
+	
+</form>
+
+{% endblock %}
+

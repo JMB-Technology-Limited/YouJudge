@@ -4,6 +4,7 @@ require __DIR__.'/../config.php';
 require __DIR__.'/Pimple.php';
 require __DIR__.'/TimeSource.php';
 require __DIR__.'/SiteRepository.php';
+require __DIR__.'/../vendor/autoload.php';
 
 
 $app = new Pimple();
@@ -19,6 +20,15 @@ $app['database'] = function ($c) {
 
 $app['siterepository'] = function($c) {
 	return new SiteRepository($c['database'],$c['timesource']);
+};
+
+$app['twig'] = function($c) {
+	$loader = new Twig_Loader_Filesystem(__DIR__.'/../templates/');
+	$twig = new Twig_Environment($loader, array(
+		'cache' => __DIR__.'/../cachedtemplates',
+		'debug' => DEBUG_MODE,
+	));	
+	return $twig;
 };
 
 

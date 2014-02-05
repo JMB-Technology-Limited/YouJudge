@@ -26,6 +26,19 @@ class SiteRepository {
 			));
 		return $this->db->lastInsertId();
 	}
+
+	function createVersusType($title,$question, $adminPassword) {
+		$stat = $this->db->prepare("INSERT INTO site (title,question_type,question,admin_password,created_at) ".
+				"VALUES(:title,:question_type,:question,:admin_password,:created_at)");
+		$stat->execute(array(
+				'title'=>$title,
+				'question'=>$question,
+				'admin_password'=>$adminPassword,
+				'question_type'=>'versus',
+				'created_at'=>$this->timesource->getFormattedForDataBase(),
+			));
+		return $this->db->lastInsertId();
+	}
 	
 }
 

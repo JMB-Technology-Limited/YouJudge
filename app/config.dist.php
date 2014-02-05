@@ -1,6 +1,9 @@
 <?php
 
 
+
+define('DEBUG_MODE', true);
+
 define('DATABASE_TYPE', 'mysql');
 define('DATABASE_SERVER', 'localhost');
 define('DATABASE_USER', 'codepicturejudge');
