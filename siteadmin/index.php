@@ -9,8 +9,14 @@ if (!$site) {
 }
 
 
+$params = array('site'=>$site);
 
-print $app['twig']->render('siteadmin/index.html.twig',array('site'=>$site));
+if ($site->getType() == 'answer') {
+	
+}
+
+
+print $app['twig']->render('siteadmin/index.html.twig',$params);
 
 
 

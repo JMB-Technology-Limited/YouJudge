@@ -15,7 +15,7 @@ class Site {
 			$this->title = isset($data['title']) ? $data['title'] : null;
 			$this->question = isset($data['question']) ? $data['question'] : null;
 			$this->adminPassword = isset($data['adminPassword']) ? $data['adminPassword'] : null;
-			$this->type = isset($data['type']) ? $data['type'] : null;
+			$this->type = isset($data['question_type']) ? $data['question_type'] : null;
 		}
 	}
 

@@ -4,7 +4,30 @@
 
 {% block content %}
 
-<p>Title: {{ site.title }}</p>
+	<p>Title: {{ site.title }}</p>
+
+	<p>Type: {{ site.type }}</p>
+
+	<p>Question: {{ site.question }}</p>
+
+	{% if site.type == 'answer' %}
+		<table>
+			<tr>
+				<th>&nbsp;</th>
+				<th>Answer</th>
+			</tr>
+
+			<tr>
+				<form action="newanswer.php?siteid={{ site.id }}" method="post">
+					<td>&nbsp;</td>
+					<td>
+						<input type="text" name="answer">
+						<input type="submit" value="create new answer">
+					</td>
+				</form>
+			</tr>
+		</table>
+	{% endif %}
 
 {% endblock %}
 

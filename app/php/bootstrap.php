@@ -5,6 +5,7 @@ require __DIR__.'/Pimple.php';
 require __DIR__.'/TimeSource.php';
 require __DIR__.'/SiteRepository.php';
 require __DIR__.'/Site.php';
+require __DIR__.'/QuestionAnswerRepository.php';
 require __DIR__.'/../vendor/autoload.php';
 
 
@@ -21,6 +22,9 @@ $app['database'] = function ($c) {
 
 $app['siterepository'] = function($c) {
 	return new SiteRepository($c['database'],$c['timesource']);
+};
+$app['questionanswerrepository'] = function($c) {
+	return new QuestionAnswerRepository($c['database'],$c['timesource']);
 };
 
 $app['twig'] = function($c) {
