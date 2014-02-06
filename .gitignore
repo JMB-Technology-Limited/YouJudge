@@ -1,2 +1,3 @@
 app/config.php
 app/cachedtemplates/*/*/*.php
+pictures/full/*

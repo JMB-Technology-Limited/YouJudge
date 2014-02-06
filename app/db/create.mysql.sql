@@ -22,8 +22,8 @@ ALTER TABLE question_answer ADD CONSTRAINT question_answer_site_id  FOREIGN KEY 
 
 CREATE TABLE picture (
 	id INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	source_url VARCHAR(255) NOT NULL,
-	source_text VARCHAR(255) NOT NULL,
+	source_url VARCHAR(255) NULL,
+	source_text VARCHAR(255) NULL,
 	filename VARCHAR(255) NOT NULL,
 	created_at DATETIME NOT NULL,
 	removed_at DATETIME NULL,

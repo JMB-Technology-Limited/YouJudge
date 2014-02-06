@@ -4,11 +4,15 @@
 
 {% block content %}
 
+	<h2>Details</h2>
+
 	<p>Title: {{ site.title }}</p>
 
 	<p>Type: {{ site.type }}</p>
 
 	<p>Question: {{ site.question }}</p>
+
+	<h2>Answers</h2>
 
 	{% if site.type == 'answer' %}
 		<table>
@@ -33,6 +37,13 @@
 			</tr>
 		</table>
 	{% endif %}
+	
+	<h2>Pictures</h2>
 
+	<form id="new-content-form" enctype="multipart/form-data" action="newpictureupload.php?siteid={{ site.id }}" method="post">
+		<input type="file" id="picture" name="picture">
+		<input type="submit" value="Upload Picture" class="">
+	</form>
+	
 {% endblock %}
 

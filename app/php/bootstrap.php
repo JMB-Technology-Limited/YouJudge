@@ -7,6 +7,7 @@ require __DIR__.'/SiteRepository.php';
 require __DIR__.'/Site.php';
 require __DIR__.'/QuestionAnswerRepository.php';
 require __DIR__.'/QuestionAnswer.php';
+require __DIR__.'/PictureRepository.php';
 require __DIR__.'/../vendor/autoload.php';
 
 /**
@@ -30,6 +31,9 @@ $app['siterepository'] = function($c) {
 };
 $app['questionanswerrepository'] = function($c) {
 	return new QuestionAnswerRepository($c['database'],$c['timesource']);
+};
+$app['picturerepository'] = function($c) {
+	return new PictureRepository($c['database'],$c['timesource']);
 };
 
 $app['twig'] = function($c) {
