@@ -19,7 +19,13 @@ if (isset($_FILES['picture']) && isset($_FILES['picture']['error']) && $_FILES['
 	if (in_array($extension,$validImageExtensions)) {
 		list($width, $height, $type, $attr)= getimagesize($_FILES['picture']['tmp_name']);
 		if (in_array($type, array(IMAGETYPE_GIF, IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_JPEG2000))) {
-			$app['picturerepository']->createFromWebUpload($site, $_FILES['picture']['tmp_name'], $_FILES['picture']['name'], null, null);
+			$app['picturerepository']->createFromWebUpload(
+					$site, 
+					$_FILES['picture']['tmp_name'], 
+					$_FILES['picture']['name'], 
+					$_POST['sourceurl'], 
+					$_POST['sourcetext']
+				);
 		}
 	}
 }

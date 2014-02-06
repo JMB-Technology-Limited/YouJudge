@@ -41,8 +41,33 @@
 	<h2>Pictures</h2>
 
 	<form id="new-content-form" enctype="multipart/form-data" action="newpictureupload.php?siteid={{ site.id }}" method="post">
-		<input type="file" id="picture" name="picture">
-		<input type="submit" value="Upload Picture" class="">
+		
+		<div class="entry">	
+			<label>
+				File:
+				<input type="file" id="picture" name="picture">
+			</label>
+		</div>
+		
+		<div class="entry">	
+			<label>
+				Source Text:
+				<input type="text" name="sourcetext">
+			</label>
+		</div>
+		
+		<div class="entry">	
+			<label>
+				Source Web Page Address:
+				<input type="text" name="sourceurl">
+			</label>
+		</div>
+
+		
+		<div class="actions">	
+			<input type="submit" value="Upload Picture" class="">
+		</div>
+		
 	</form>
 	
 {% endblock %}
