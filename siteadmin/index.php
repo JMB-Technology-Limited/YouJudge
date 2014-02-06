@@ -12,7 +12,10 @@ if (!$site) {
 }
 
 
-$params = array('site'=>$site);
+$params = array(
+		'site'=>$site,
+		'lastpictures' => $app['picturerepository']->getLastAddedForSite($site,5),
+	);
 
 if ($site->getType() == 'answer') {
 	$params['answers']= $app['questionanswerrepository']->loadForSite($site);

@@ -40,6 +40,12 @@
 	
 	<h2>Pictures</h2>
 
+	<ul class="pictures">
+		{% for picture in lastpictures %}
+			<li><img src="{{ WebRoot }}pictures/full/{{ picture.fileName }}" class="thumbnail"></li>
+		{% endfor %}
+	</ul>
+	
 	<form id="new-content-form" enctype="multipart/form-data" action="newpictureupload.php?siteid={{ site.id }}" method="post">
 		
 		<div class="entry">	

@@ -47,6 +47,21 @@ class PictureRepository {
 			));
 	}
 	
+	public function getLastAddedForSite(Site $site, $count=5) {
+		$stat = $this->db->prepare("SELECT picture.* FROM picture ".
+				"JOIN picture_in_site ON picture_in_site.picture_id = picture.id ".
+				"WHERE picture_in_site.site_id = :site_id ".
+				"ORDER BY picture_in_site.created_at DESC ".
+				"LIMIT ".intval($count));
+		$stat->execute(array(
+			'site_id'=>$site->getId(),
+		));
+		$out = array();
+		while($data = $stat->fetch()) {
+			$out[] = new Picture($data);
+		}
+		return $out;		
+	}
 	
 }
 

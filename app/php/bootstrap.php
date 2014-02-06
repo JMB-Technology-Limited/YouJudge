@@ -8,6 +8,7 @@ require __DIR__.'/Site.php';
 require __DIR__.'/QuestionAnswerRepository.php';
 require __DIR__.'/QuestionAnswer.php';
 require __DIR__.'/PictureRepository.php';
+require __DIR__.'/Picture.php';
 require __DIR__.'/../vendor/autoload.php';
 
 /**
@@ -42,6 +43,7 @@ $app['twig'] = function($c) {
 		'cache' => __DIR__.'/../cachedtemplates',
 		'debug' => DEBUG_MODE,
 	));	
+	$twig->addGlobal('WebRoot', WEB_ROOT);
 	return $twig;
 };
 
