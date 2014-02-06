@@ -26,6 +26,7 @@ CREATE TABLE picture (
 	source_text VARCHAR(255) NOT NULL,
 	filename VARCHAR(255) NOT NULL,
 	created_at DATETIME NOT NULL,
+	removed_at DATETIME NULL,
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
@@ -33,6 +34,7 @@ CREATE TABLE picture_in_site (
 	site_id INT UNSIGNED NOT NULL,
 	picture_id INT UNSIGNED NOT NULL,
 	created_at DATETIME NOT NULL,
+	removed_at DATETIME NULL,
 	PRIMARY KEY (site_id, picture_Id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE picture_in_site ADD CONSTRAINT picture_in_site_site_id  FOREIGN KEY (site_id) REFERENCES site(id);
