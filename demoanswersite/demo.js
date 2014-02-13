@@ -12,7 +12,11 @@ function codeAPictureJudgeStartGotData(data) {
 }
 
 function clickAnswer(idx){
-	alert("idx "+idx);
+	codeAPictureJudgeVote(pictureId, idx);
+}
+
+function codeAPictureJudgeVoteGotData(data) {
+	nextPicture();
 }
 
 function nextPicture() {
@@ -21,10 +25,12 @@ function nextPicture() {
 
 function codeAPictureJudgeGetNextQuestionGotData(data) {
 	pictureElement.src = data.picture.url_full_size;
+	pictureId = data.picture.id;
 }
 
 // set up page and some variables
 var pictureElement = document.getElementById("Picture");
+var pictureId;
 // start loading data on this quiz
 codeAPictureJudgeStart('http://localhost:20155/',1);
 

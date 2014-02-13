@@ -50,7 +50,7 @@ class PictureRepository {
 	public function getLastAddedForSite(Site $site, $count=5) {
 		$stat = $this->db->prepare("SELECT picture.* FROM picture ".
 				"JOIN picture_in_site ON picture_in_site.picture_id = picture.id ".
-				"WHERE picture_in_site.site_id = :site_id ".
+				"WHERE picture_in_site.site_id = :site_id  AND picture_in_site.removed_at IS NULL ".
 				"ORDER BY picture_in_site.created_at DESC ".
 				"LIMIT ".intval($count));
 		$stat->execute(array(
@@ -61,6 +61,20 @@ class PictureRepository {
 			$out[] = new Picture($data);
 		}
 		return $out;		
+	}
+	
+	public function getByIdInSite($id, Site $site) {
+		$stat = $this->db->prepare("SELECT picture.* FROM picture ".
+				"JOIN picture_in_site ON picture_in_site.picture_id = picture.id ".
+				"WHERE picture_in_site.site_id = :site_id AND picture.id = :id ".
+				"AND picture_in_site.removed_at IS NULL");
+		$stat->execute(array(
+			'site_id'=>$site->getId(),
+			'id'=>$id,
+		));
+		if ($stat->rowCount() > 0) {
+			return new Picture($stat->fetch());
+		}
 	}
 	
 }

@@ -23,6 +23,7 @@ $qdata = $app['siterepository']->getNextQuestionForTypeAnswer($site);
 if ($qdata) {
 	print json_encode(array(
 		'picture'=>array(
+			'id'=>$qdata['picture']->getId(),
 			'source_url'=>$qdata['picture']->getSourceUrl(),
 			'source_text'=>$qdata['picture']->getSourceText(),
 			'url_full_size'=>$app['webenvironment']->getSiteRoot().'pictures/full/'.$qdata['picture']->getFilename(),

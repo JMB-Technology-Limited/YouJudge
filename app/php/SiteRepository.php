@@ -68,6 +68,21 @@ class SiteRepository {
 		}
 	}
 	
+	public function castVoteForTypeAnswer(Site $site, Picture $picture, 
+			QuestionAnswer $questionanswer,$useragent, $ip) {
+		
+		$stat = $this->db->prepare("INSERT INTO vote_answer (picture_id,question_answer_id,ip,useragent,created_at) ".
+				" VALUES (:picture_id,:question_answer_id,:ip,:useragent,:created_at)");
+		$stat->execute(array(
+			'picture_id'=>$picture->getId(),
+			'question_answer_id'=>$questionanswer->getId(),
+			'ip'=>$ip,
+			'useragent'=>$useragent,
+			'created_at'=>$this->timesource->getFormattedForDataBase(),
+		));
+		
+	}
+	
 }
 
 

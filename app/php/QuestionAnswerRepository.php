@@ -37,7 +37,8 @@ class QuestionAnswerRepository {
 	}
 	
 	public function loadForSite(Site $site) {
-		$stat = $this->db->prepare("SELECT * FROM question_answer WHERE site_id=:id ORDER BY answer_index ASC");
+		$stat = $this->db->prepare("SELECT * FROM question_answer ".
+				"WHERE site_id=:id ORDER BY answer_index ASC");
 		$stat->execute(array('id'=>$site->getId()));
 		$out = array();
 		while($data = $stat->fetch()) {
@@ -45,6 +46,19 @@ class QuestionAnswerRepository {
 		}
 		return $out;
 	}
+		
+	public function loadByIdxForSite($idx, Site $site) {
+		$stat = $this->db->prepare("SELECT * FROM question_answer ".
+				"WHERE site_id=:id AND answer_index = :idx");
+		$stat->execute(array(
+			'id'=>$site->getId(),
+			'idx'=>$idx,
+		));
+		if ($stat->rowCount() > 0) {
+			return new QuestionAnswer($stat->fetch());
+		}
+	}
+	
 	
 }
 

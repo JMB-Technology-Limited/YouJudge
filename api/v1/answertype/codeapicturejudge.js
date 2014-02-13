@@ -35,6 +35,22 @@ function codeAPictureJudgeGetNextQuestion() {
 	request = null;
 }
 
+function codeAPictureJudgeVote(pictureid, idx) {
+	var request = new XMLHttpRequest;
+	request.open('POST', codeAPictureJudgeURL+'/api/v1/answertype/vote.json.php?siteid='+codeAPictureSiteId, true);
+	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	request.onreadystatechange = function() {
+	  if (this.readyState === 4){
+		if (this.status >= 200 && this.status < 400){
+			data = JSON.parse(this.responseText);
+			codeAPictureJudgeVoteGotData(data);
+		} else {
+		}
+	  }
+	}
+	request.send("pictureid="+parseInt(pictureid)+"&idx="+parseInt(idx));
+	request = null;
+}
 
 
 function escapeHTML(inString) {
