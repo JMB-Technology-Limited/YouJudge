@@ -36,3 +36,11 @@ function codeAPictureJudgeGetNextQuestion() {
 }
 
 
+
+function escapeHTML(inString) {
+	var pre = document.createElement('pre');
+    var text = document.createTextNode( inString );
+    pre.appendChild(text);
+    return pre.innerHTML;
+}
+

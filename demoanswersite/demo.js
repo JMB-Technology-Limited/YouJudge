@@ -1,3 +1,20 @@
+function codeAPictureJudgeStartGotData(data) {
+	// add Buttons for answers
+	var html = '';
+	for(i in data.answers) {
+		html += '<li><input type="button" '+
+					' value="'+escapeHTML(data.answers[i].answer)+'" '+
+					' onclick="clickAnswer('+data.answers[i].idx+');"></li>';
+	}
+	document.getElementById("AnswerButtonList").innerHTML = html;
+	// load first question!
+	nextPicture();
+}
+
+function clickAnswer(idx){
+	alert("idx "+idx);
+}
+
 function nextPicture() {
 	codeAPictureJudgeGetNextQuestion();
 }
@@ -7,13 +24,7 @@ function codeAPictureJudgeGetNextQuestionGotData(data) {
 }
 
 // set up page and some variables
-codeAPictureJudgeStart('http://localhost:20155/',1);
 var pictureElement = document.getElementById("Picture");
-
-function codeAPictureJudgeStartGotData(data) {
-	// load first question!
-	nextPicture();
-}
-
-
+// start loading data on this quiz
+codeAPictureJudgeStart('http://localhost:20155/',1);
 

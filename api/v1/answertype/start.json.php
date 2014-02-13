@@ -21,7 +21,15 @@ header("Access-Control-Allow-Origin: *");
 $data = array(
 		'title'=>$site->getTitle(),
 		'question'=>$site->getQuestion(),
+		'answers'=>array(),
 	);
+
+foreach($app['questionanswerrepository']->loadForSite($site) as $answer) {
+	$data['answers'][] = array(
+			'idx'=>$answer->getAnswerIndex(),
+			'answer'=>$answer->getAnswer(),
+		);
+}
 
 
 print json_encode($data);
