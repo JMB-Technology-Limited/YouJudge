@@ -9,6 +9,7 @@ require __DIR__.'/QuestionAnswerRepository.php';
 require __DIR__.'/QuestionAnswer.php';
 require __DIR__.'/PictureRepository.php';
 require __DIR__.'/Picture.php';
+require __DIR__.'/WebEnvironment.php';
 require __DIR__.'/../vendor/autoload.php';
 
 /**
@@ -47,5 +48,9 @@ $app['twig'] = function($c) {
 	return $twig;
 };
 
+
+$app['webenvironment'] = function($c) {
+	return new WebEnvironment($_SERVER);
+};
 
 

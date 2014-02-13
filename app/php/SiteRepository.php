@@ -54,6 +54,20 @@ class SiteRepository {
 		}
 	}
 	
+	public function getNextQuestionForTypeAnswer(Site $site) {
+		$stat = $this->db->prepare("SELECT * FROM picture ".
+				"JOIN picture_in_site ON picture_in_site.picture_id = picture.id ".
+				"WHERE picture.removed_at IS NULL AND picture_in_site.removed_at IS NULL ".
+				"AND picture_in_site.site_id = :site_id ".
+				"ORDER BY rand()");
+		$stat->execute(array('site_id'=>$site->getId()));
+		if ($stat->rowCount() > 0) {
+			return array(
+				'picture'=>new Picture($stat->fetch())
+			);
+		}
+	}
+	
 }
 
 
