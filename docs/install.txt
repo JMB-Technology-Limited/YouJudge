@@ -1,0 +1,13 @@
+Install
+=======
+
+Copy files to web server.
+
+Make sure app/cachedtemplates/ and pictures/ are writeable by PHP on the web server.
+
+Copy app/config.dist.php to app/config.php and edit.
+
+Run the contents of the file app/db/create.mysql.sql in the database.
+
+Ready to use!
+

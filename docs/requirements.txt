@@ -1,0 +1,5 @@
+Requirements
+============
+PHP
+MySQL
+PHP can write to folders in the app.
