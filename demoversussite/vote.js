@@ -22,6 +22,11 @@ function votePicture2() {
 	codeAPictureJudgeVote(picture2Id,picture1Id);
 }
 
+function codeAPictureJudgeVoteGotData(data) {
+	nextPicture();
+}
+
+
 // set up page and some variables
 var picture1Element = document.getElementById("Picture1");
 var picture2Element = document.getElementById("Picture2");
