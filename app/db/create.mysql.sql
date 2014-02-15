@@ -4,8 +4,8 @@ CREATE TABLE site (
 	question_type  ENUM('answer', 'versus'),
 	question TEXT NOT NULL,
 	admin_password VARCHAR(255) NOT NULL,
-	published TINYINT(1) NOT NULL DEFAULT 1,
 	created_at DATETIME NOT NULL,
+	removed_at DATETIME NULL,
 	PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
