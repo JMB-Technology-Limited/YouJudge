@@ -14,6 +14,13 @@ function codeAPictureJudgeGetNextQuestionGotData(data) {
 	picture2Id = data.picture2.id;
 }
 
+function votePicture1() {
+	codeAPictureJudgeVote(picture1Id,picture2Id);
+}
+
+function votePicture2() {
+	codeAPictureJudgeVote(picture2Id,picture1Id);
+}
 
 // set up page and some variables
 var picture1Element = document.getElementById("Picture1");

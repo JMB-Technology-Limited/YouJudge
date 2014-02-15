@@ -138,6 +138,24 @@ class SiteRepository {
 		return $out;		
 	}
 
+	public function castVoteForTypeVersus(Site $site, Picture $winningPicture, Picture $losingPicture, $useragent, $ip) {
+		
+		$stat = $this->db->prepare("INSERT INTO vote_versus (site_id,winning_picture_id,losing_picture_id,ip,useragent,created_at) ".
+				" VALUES (:site_id,:winning_picture_id,:losing_picture_id,:ip,:useragent,:created_at)");
+		$stat->execute(array(
+			'site_id'=>$site->getId(),
+			'winning_picture_id'=>$winningPicture->getId(),
+			'losing_picture_id'=>$losingPicture->getId(),
+			'ip'=>$ip,
+			'useragent'=>$useragent,
+			'created_at'=>$this->timesource->getFormattedForDataBase(),
+		));
+		
+	}
+	
+	public function getAndCacheVoteStatsForPictureForTypeVersus(Site $site, Picture $picture) {
+		return array();
+	}
 	
 }
 
