@@ -38,4 +38,5 @@ $app['siterepository']->castVoteForTypeVersus($site, $winningpicture, $losingpic
 $winningstats = $app['siterepository']->getAndCacheVoteStatsForPictureForTypeVersus($site, $winningpicture, true);
 $losingstats = $app['siterepository']->getAndCacheVoteStatsForPictureForTypeVersus($site, $losingpicture, true);
 
-print json_encode(array('stats'=>array()));
+print json_encode(array('stats'=>array('winning_picture'=>$winningstats,'losing_picture'=>$losingstats)));
+

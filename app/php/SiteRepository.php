@@ -154,7 +154,48 @@ class SiteRepository {
 	}
 	
 	public function getAndCacheVoteStatsForPictureForTypeVersus(Site $site, Picture $picture) {
-		return array();
+		
+		$statWinning = $this->db->prepare("SELECT COUNT(winning_picture_id) AS c  ".
+				"FROM vote_versus ".
+				"WHERE site_id=:site_id  AND winning_picture_id=:picture_id ".
+				"GROUP BY vote_versus.winning_picture_id");
+		$statWinning->execute(array(
+			'site_id'=>$site->getId(),
+			'picture_id'=>$picture->getId()
+		));
+		$data = $statWinning->fetch();
+		$winningVotes = $data ? $data['c'] : 0;
+		
+		
+		$statLosing = $this->db->prepare("SELECT COUNT(losing_picture_id) AS c  ".
+				"FROM vote_versus ".
+				"WHERE site_id=:site_id  AND losing_picture_id=:picture_id ".
+				"GROUP BY vote_versus.losing_picture_id");
+		$statLosing->execute(array(
+			'site_id'=>$site->getId(),
+			'picture_id'=>$picture->getId()
+		));
+		$data = $statLosing->fetch();
+		$losingVotes = $data ? $data['c'] : 0;
+		
+		$statCache = $this->db->prepare("INSERT INTO picture_versus_cache ".
+				"(picture_id,site_id,votes_won,votes_total,votes_won_percentage) ".
+				"VALUES (:picture_id,:site_id,:votes_won,:votes_total,:votes_won_percentage) ".
+				"on duplicate key update votes_won=values(votes_won), ".
+				"votes_total=values(votes_total), votes_won_percentage=values(votes_won_percentage)");
+		$statCache->execute(array(
+			'picture_id'=>$picture->getId(),
+			'site_id'=>$site->getId(),
+			'votes_won'=>$winningVotes,
+			'votes_total'=>$winningVotes+$losingVotes,
+			'votes_won_percentage'=>( $winningVotes+$losingVotes > 0 ? 100*$winningVotes / ($winningVotes+$losingVotes) : 0.0 ),
+		));
+		
+		
+		return array(
+			'votes_won'=>$winningVotes,
+			'votes_lost'=>$losingVotes,
+		);
 	}
 	
 }
