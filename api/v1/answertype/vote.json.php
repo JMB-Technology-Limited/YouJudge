@@ -34,6 +34,6 @@ $app['siterepository']->castVoteForTypeAnswer($site, $picture,
 		$questionanswer, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
 
 
-$stats = $app['siterepository']->getVoteStatsForPictureForTypeAnswer($site, $picture);
+$stats = $app['siterepository']->getAndCacheVoteStatsForPictureForTypeAnswer($site, $picture, true);
 
 print json_encode(array('stats'=>$stats));
