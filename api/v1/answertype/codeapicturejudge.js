@@ -10,7 +10,9 @@ function codeAPictureJudgeStart(url, siteid) {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
 			data = JSON.parse(this.responseText);
-			codeAPictureJudgeStartGotData(data);
+			if (typeof(codeAPictureJudgeStartGotData) == "function") {
+				codeAPictureJudgeStartGotData(data);
+			}
 		} else {
 		}
 	  }
@@ -26,7 +28,9 @@ function codeAPictureJudgeGetNextQuestion() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
 			data = JSON.parse(this.responseText);
-			codeAPictureJudgeGetNextQuestionGotData(data);
+			if (typeof(codeAPictureJudgeGetNextQuestionGotData) == "function") {
+				codeAPictureJudgeGetNextQuestionGotData(data);
+			}
 		} else {
 		}
 	  }
@@ -43,12 +47,36 @@ function codeAPictureJudgeVote(pictureid, idx) {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
 			data = JSON.parse(this.responseText);
-			codeAPictureJudgeVoteGotData(data);
+			if (typeof(codeAPictureJudgeVoteGotData) == "function") {
+				codeAPictureJudgeVoteGotData(data);
+			}
 		} else {
 		}
 	  }
 	}
 	request.send("pictureid="+parseInt(pictureid)+"&idx="+parseInt(idx));
+	request = null;
+}
+
+function codeAPictureJudgeChart(idx, threshhold, limit, order) {
+	var url = codeAPictureJudgeURL+'/api/v1/answertype/chart.json.php?siteid='+codeAPictureSiteId+'&idx='+idx;
+	if (threshhold) url += '&threshhold='+threshhold;
+	if (limit) url += '&limit='+limit;
+	if (order) url += '&order='+order;
+	var request = new XMLHttpRequest;
+	request.open('GET', url , true);
+	request.onreadystatechange = function() {
+	  if (this.readyState === 4){
+		if (this.status >= 200 && this.status < 400){
+			data = JSON.parse(this.responseText);
+			if (typeof(codeAPictureJudgeChartGotData) == "function") {
+				codeAPictureJudgeChartGotData(data);
+			}
+		} else {
+		}
+	  }
+	}
+	request.send();
 	request = null;
 }
 
