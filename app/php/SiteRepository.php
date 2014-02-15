@@ -83,6 +83,28 @@ class SiteRepository {
 		
 	}
 	
+	public function getVoteStatsForPictureForTypeAnswer(Site $site, Picture $picture) {
+		$stat = $this->db->prepare("SELECT question_answer.*, COUNT(vote_answer.picture_id) AS c  ".
+				"FROM question_answer ".
+				"LEFT JOIN vote_answer ON vote_answer.question_answer_id = question_answer.id AND vote_answer.picture_id = :picture_id ".
+				"WHERE question_answer.site_id=:site_id  ".
+				"GROUP BY question_answer.id");
+		$stat->execute(array(
+			'site_id'=>$site->getId(),
+			'picture_id'=>$picture->getId()
+		));
+		$out = array();
+		while($data = $stat->fetch()) {
+			$out[] = array(
+				'answer_idx'=>$data['answer_index'],
+				'answer'=>$data['answer'],
+				'votes'=>$data['c']
+			);
+		}
+		return $out;		
+	}
+
+	
 }
 
 

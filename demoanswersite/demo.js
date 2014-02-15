@@ -16,6 +16,11 @@ function clickAnswer(idx){
 }
 
 function codeAPictureJudgeVoteGotData(data) {
+	var html = '';
+	for(i in data.stats) {
+		html += '<p>'+escapeHTML(data.stats[i].answer)+' has '+data.stats[i].votes+' votes.</p>'
+	}
+	document.getElementById("LastVoteDetails").innerHTML = html;
 	nextPicture();
 }
 

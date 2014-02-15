@@ -30,9 +30,10 @@ if (!$questionanswer) {
 	die("404 no question");
 }
 
-$picture = $app['siterepository']->castVoteForTypeAnswer($site, $picture, 
+$app['siterepository']->castVoteForTypeAnswer($site, $picture, 
 		$questionanswer, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
 
 
+$stats = $app['siterepository']->getVoteStatsForPictureForTypeAnswer($site, $picture);
 
-print json_encode(array());
+print json_encode(array('stats'=>$stats));
