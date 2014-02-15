@@ -94,5 +94,22 @@ class PictureRepository {
 		return $out;
 	}
 	
+	public function getChartForTypeVersus(Site $site, $threshhold=3, $order="DESC", $limit=100) {
+		$order = (strtoupper($order) == "DESC") ? "DESC" : "ASC";
+		$stat = $this->db->prepare("SELECT picture.*, picture_versus_cache.votes_total, picture_versus_cache.votes_won FROM picture ".
+				"JOIN picture_versus_cache ON picture_versus_cache.picture_id = picture.id AND picture_versus_cache.site_id = :id ".
+				"WHERE picture_versus_cache.votes_total >= :threshhold ".
+				"ORDER BY picture_versus_cache.votes_won_percentage ".$order." LIMIT ".intval($limit));
+		$stat->execute(array(
+			'id'=>$site->getId(),
+			'threshhold'=>$threshhold,
+		));
+		$out = array();
+		while($data = $stat->fetch()) {
+			$out[] = array('picture'=>new Picture($data),'votes_won'=>$data['votes_won'],'votes_total'=>$data['votes_total']);
+		}
+		return $out;
+	}
+	
 }
 

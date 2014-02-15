@@ -58,7 +58,7 @@ function codeAPictureJudgeVote(pictureid, idx) {
 	request = null;
 }
 
-function codeAPictureJudgeChart(idx, threshhold, limit, order) {
+function codeAPictureJudgeChart(idx, order, threshhold, limit) {
 	var url = codeAPictureJudgeURL+'/api/v1/answertype/chart.json.php?siteid='+codeAPictureSiteId+'&idx='+idx;
 	if (threshhold) url += '&threshhold='+threshhold;
 	if (limit) url += '&limit='+limit;

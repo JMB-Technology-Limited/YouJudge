@@ -60,6 +60,28 @@ function codeAPictureJudgeVote(winningpictureid, losingpictureid) {
 	request = null;
 }
 
+function codeAPictureJudgeChart(order, threshhold, limit) {
+	var url = codeAPictureJudgeURL+'/api/v1/versustype/chart.json.php?siteid='+codeAPictureSiteId;
+	if (threshhold) url += '&threshhold='+threshhold;
+	if (limit) url += '&limit='+limit;
+	if (order) url += '&order='+order;
+	var request = new XMLHttpRequest;
+	request.open('GET', url , true);
+	request.onreadystatechange = function() {
+	  if (this.readyState === 4){
+		if (this.status >= 200 && this.status < 400){
+			data = JSON.parse(this.responseText);
+			if (typeof(codeAPictureJudgeChartGotData) == "function") {
+				codeAPictureJudgeChartGotData(data);
+			}
+		} else {
+		}
+	  }
+	}
+	request.send();
+	request = null;
+}
+
 function escapeHTML(inString) {
 	var pre = document.createElement('pre');
     var text = document.createTextNode( inString );
