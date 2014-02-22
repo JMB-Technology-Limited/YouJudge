@@ -1,0 +1,17 @@
+{% extends 'siteadmin/layout.html.twig' %}
+
+
+
+{% block content %}
+
+	<h2>Pictures</h2>
+
+	<ul class="pictures">
+		{% for picture in lastpictures %}
+			<li><img src="{{ WebRoot }}pictures/full/{{ picture.fileName }}" class="thumbnail"></li>
+		{% endfor %}
+	</ul>
+
+	
+{% endblock %}
+

@@ -10,6 +10,16 @@
 		{% block htmlHeader %}{% endblock %}
 	</head>
 	<body>
-		{% block content %}{% endblock %}
+		<div id="Header">
+			<ul id="Menu">
+				<li><a href="index.php?siteid={{ site.id }}">Home</a></li>
+				<li><a href="listpictures.php?siteid={{ site.id }}">Show all Pictures</a></li>
+			</ul>
+		</div>
+		<div id="Body">
+			{% block content %}{% endblock %}
+		</div>
+		<div id="Footer">
+		</div>
 	</body>
 </html>
