@@ -7,6 +7,14 @@ function codeAPictureJudgeStartGotData(data) {
 					' onclick="clickAnswer('+data.answers[i].idx+');"></li>';
 	}
 	document.getElementById("AnswerButtonList").innerHTML = html;
+	// add links for chart
+	var html = '';
+	for(i in data.answers) {
+		html += '<li><a href="chart.html?idx='+data.answers[i].idx+'">'+
+					escapeHTML(data.answers[i].answer)+
+					' chart</a></li>';
+	}
+	document.getElementById("ChartsLinkList").innerHTML = html;
 	// load first question!
 	nextPicture();
 }

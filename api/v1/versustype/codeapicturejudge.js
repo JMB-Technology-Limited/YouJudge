@@ -5,7 +5,7 @@ function codeAPictureJudgeStart(url, siteid) {
 	codeAPictureJudgeURL = url;
 	codeAPictureSiteId = siteid;
 	var request = new XMLHttpRequest;
-	request.open('GET', url+'/api/v1/answertype/start.json.php?siteid='+siteid, true);
+	request.open('GET', url+'/api/v1/versustype/start.json.php?siteid='+siteid, true);
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
@@ -21,9 +21,10 @@ function codeAPictureJudgeStart(url, siteid) {
 	request = null;
 }
 
+
 function codeAPictureJudgeGetNextQuestion() {
 	var request = new XMLHttpRequest;
-	request.open('GET', codeAPictureJudgeURL+'/api/v1/answertype/get.json.php?siteid='+codeAPictureSiteId, true);
+	request.open('GET', codeAPictureJudgeURL+'/api/v1/versustype/get.json.php?siteid='+codeAPictureSiteId, true);
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
@@ -39,9 +40,10 @@ function codeAPictureJudgeGetNextQuestion() {
 	request = null;
 }
 
-function codeAPictureJudgeVote(pictureid, idx) {
+
+function codeAPictureJudgeVote(winningpictureid, losingpictureid) {
 	var request = new XMLHttpRequest;
-	request.open('POST', codeAPictureJudgeURL+'/api/v1/answertype/vote.json.php?siteid='+codeAPictureSiteId, true);
+	request.open('POST', codeAPictureJudgeURL+'/api/v1/versustype/vote.json.php?siteid='+codeAPictureSiteId, true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
@@ -54,12 +56,12 @@ function codeAPictureJudgeVote(pictureid, idx) {
 		}
 	  }
 	}
-	request.send("pictureid="+parseInt(pictureid)+"&idx="+parseInt(idx));
+	request.send("winningpictureid="+parseInt(winningpictureid)+"&losingpictureid="+parseInt(losingpictureid));
 	request = null;
 }
 
-function codeAPictureJudgeChart(idx, order, threshhold, limit) {
-	var url = codeAPictureJudgeURL+'/api/v1/answertype/chart.json.php?siteid='+codeAPictureSiteId+'&idx='+idx;
+function codeAPictureJudgeChart(order, threshhold, limit) {
+	var url = codeAPictureJudgeURL+'/api/v1/versustype/chart.json.php?siteid='+codeAPictureSiteId;
 	if (threshhold) url += '&threshhold='+threshhold;
 	if (limit) url += '&limit='+limit;
 	if (order) url += '&order='+order;
@@ -79,7 +81,6 @@ function codeAPictureJudgeChart(idx, order, threshhold, limit) {
 	request.send();
 	request = null;
 }
-
 
 function escapeHTML(inString) {
 	var pre = document.createElement('pre');
