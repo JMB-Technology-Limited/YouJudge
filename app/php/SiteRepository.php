@@ -124,6 +124,17 @@ class SiteRepository {
 	}
 
 	
+	function loadSites() {
+		$stat = $this->db->prepare("SELECT * FROM site");
+		$stat->execute();
+		$out = array();
+		while($data = $stat->fetch()) {
+			$out[] = new Site($data);
+		}
+		return $out;
+	}
+	
+	
 }
 
 

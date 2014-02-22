@@ -1,0 +1,19 @@
+{% extends 'sysadmin/layout.html.twig' %}
+
+
+
+{% block content %}
+
+
+	<table>
+		{% for site in sites %}
+			<tr>
+				<td><a href="/siteadmin/index.php?siteid={{ site.id }}">{{ site.id }}</a></td>
+				<td><a href="/siteadmin/index.php?siteid={{ site.id }}">{{ site.title }}</a></td>
+			</tr>
+		{% endfor %}
+	</table>
+
+
+{% endblock %}
+
