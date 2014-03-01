@@ -33,5 +33,5 @@ var picture2Element = document.getElementById("Picture2");
 var picture1Id;
 var picture2Id;
 // start loading data on this quiz
-codeAPictureJudgeStart('http://localhost:20155/',2);
+codeAPictureJudgeStart('http://localhost:20155/',2,'apipassword');
 

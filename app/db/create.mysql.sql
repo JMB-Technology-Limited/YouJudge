@@ -4,6 +4,7 @@ CREATE TABLE site (
 	question_type  ENUM('answer', 'versus'),
 	question TEXT NOT NULL,
 	admin_password VARCHAR(255) NOT NULL,
+	api_password VARCHAR(255) NOT NULL,
 	created_at DATETIME NOT NULL,
 	removed_at DATETIME NULL,
 	PRIMARY KEY(id)

@@ -16,7 +16,7 @@ function codeAPictureJudgeChartGotData(data) {
 
 
 // Start & load Chart
-codeAPictureJudgeStart('http://localhost:20155/',2);
+codeAPictureJudgeStart('http://localhost:20155/',2,'apipassword');
 
 
 

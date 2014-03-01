@@ -19,27 +19,29 @@ class SiteRepository {
 	}
 
 	function createAnswerType($title,$question, $adminPassword) {
-		$stat = $this->db->prepare("INSERT INTO site (title,question_type,question,admin_password,created_at) ".
-				"VALUES(:title,:question_type,:question,:admin_password,:created_at)");
+		$stat = $this->db->prepare("INSERT INTO site (title,question_type,question,admin_password,api_password,created_at) ".
+				"VALUES(:title,:question_type,:question,:admin_password,:api_password,:created_at)");
 		$stat->execute(array(
 				'title'=>$title,
 				'question'=>$question,
 				'admin_password'=>$adminPassword,
 				'question_type'=>'answer',
 				'created_at'=>$this->timesource->getFormattedForDataBase(),
+				'api_password'=>$this->createKey(10, 100),
 			));
 		return $this->db->lastInsertId();
 	}
 
 	function createVersusType($title,$question, $adminPassword) {
-		$stat = $this->db->prepare("INSERT INTO site (title,question_type,question,admin_password,created_at) ".
-				"VALUES(:title,:question_type,:question,:admin_password,:created_at)");
+		$stat = $this->db->prepare("INSERT INTO site (title,question_type,question,admin_password,api_password,created_at) ".
+				"VALUES(:title,:question_type,:question,:admin_password,:api_password,:created_at)");
 		$stat->execute(array(
 				'title'=>$title,
 				'question'=>$question,
 				'admin_password'=>$adminPassword,
 				'question_type'=>'versus',
 				'created_at'=>$this->timesource->getFormattedForDataBase(),
+				'api_password'=>$this->createKey(10, 100),
 			));
 		return $this->db->lastInsertId();
 	}
@@ -208,7 +210,16 @@ class SiteRepository {
 		return $out;
 	}
 	
-	
+	function createKey($minLength = 10, $maxLength = 100) {
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+		$string ='';
+		$length = mt_rand($minLength, $maxLength);
+		for ($p = 0; $p < $length; $p++) {
+			$string .= $characters[mt_rand(0, strlen($characters)-1)];
+		}
+		return $string;
+	}
+
 }
 
 

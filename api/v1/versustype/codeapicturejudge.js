@@ -1,11 +1,13 @@
 var codeAPictureJudgeURL;
 var codeAPictureSiteId;
+var codeAPictureSiteAPIPassword;
 
-function codeAPictureJudgeStart(url, siteid) {
+function codeAPictureJudgeStart(url, siteid, siteapipassword) {
 	codeAPictureJudgeURL = url;
 	codeAPictureSiteId = siteid;
+	codeAPictureSiteAPIPassword = siteapipassword;
 	var request = new XMLHttpRequest;
-	request.open('GET', url+'/api/v1/versustype/start.json.php?siteid='+siteid, true);
+	request.open('GET', url+'/api/v1/versustype/start.json.php?siteid='+siteid+"&siteapipassword="+codeAPictureSiteAPIPassword, true);
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
@@ -24,7 +26,7 @@ function codeAPictureJudgeStart(url, siteid) {
 
 function codeAPictureJudgeGetNextQuestion() {
 	var request = new XMLHttpRequest;
-	request.open('GET', codeAPictureJudgeURL+'/api/v1/versustype/get.json.php?siteid='+codeAPictureSiteId, true);
+	request.open('GET', codeAPictureJudgeURL+'/api/v1/versustype/get.json.php?siteid='+codeAPictureSiteId+"&siteapipassword="+codeAPictureSiteAPIPassword, true);
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
@@ -43,7 +45,7 @@ function codeAPictureJudgeGetNextQuestion() {
 
 function codeAPictureJudgeVote(winningpictureid, losingpictureid) {
 	var request = new XMLHttpRequest;
-	request.open('POST', codeAPictureJudgeURL+'/api/v1/versustype/vote.json.php?siteid='+codeAPictureSiteId, true);
+	request.open('POST', codeAPictureJudgeURL+'/api/v1/versustype/vote.json.php?siteid='+codeAPictureSiteId+"&siteapipassword="+codeAPictureSiteAPIPassword, true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
@@ -61,7 +63,7 @@ function codeAPictureJudgeVote(winningpictureid, losingpictureid) {
 }
 
 function codeAPictureJudgeChart(order, threshhold, limit) {
-	var url = codeAPictureJudgeURL+'/api/v1/versustype/chart.json.php?siteid='+codeAPictureSiteId;
+	var url = codeAPictureJudgeURL+'/api/v1/versustype/chart.json.php?siteid='+codeAPictureSiteId+"&siteapipassword="+codeAPictureSiteAPIPassword;
 	if (threshhold) url += '&threshhold='+threshhold;
 	if (limit) url += '&limit='+limit;
 	if (order) url += '&order='+order;

@@ -23,7 +23,7 @@ location.search.substr(1).split("&").forEach(function(item) {queryDict[item.spli
 var idx = queryDict['idx'];
 
 // Start & load Chart
-codeAPictureJudgeStart('http://localhost:20155/',1);
+codeAPictureJudgeStart('http://localhost:20155/',1,'apipassword');
 
 
 

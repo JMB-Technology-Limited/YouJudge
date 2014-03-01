@@ -45,5 +45,5 @@ function codeAPictureJudgeGetNextQuestionGotData(data) {
 var pictureElement = document.getElementById("Picture");
 var pictureId;
 // start loading data on this quiz
-codeAPictureJudgeStart('http://localhost:20155/',1);
+codeAPictureJudgeStart('http://localhost:20155/',1,'apipassword');
 
