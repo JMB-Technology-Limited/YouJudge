@@ -94,7 +94,7 @@ class SiteRepository {
 			'picture_id'=>$picture->getId(),
 			'question_answer_id'=>$questionanswer->getId(),
 			'ip'=>$ip,
-			'useragent'=>$useragent,
+			'useragent'=>substr($useragent,0,250),
 			'created_at'=>$this->timesource->getFormattedForDataBase(),
 		));
 		
@@ -149,7 +149,7 @@ class SiteRepository {
 			'winning_picture_id'=>$winningPicture->getId(),
 			'losing_picture_id'=>$losingPicture->getId(),
 			'ip'=>$ip,
-			'useragent'=>$useragent,
+			'useragent'=>substr($useragent,0,250),
 			'created_at'=>$this->timesource->getFormattedForDataBase(),
 		));
 		
