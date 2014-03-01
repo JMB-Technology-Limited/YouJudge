@@ -8,10 +8,7 @@ require 'bootstrap.php';
  */
 
 
-$sites = $app['siterepository']->loadSites();
-
-print $app['twig']->render('sysadmin/listsites.html.twig',array(
-		'sites'=>$sites,
+print $app['twig']->render('sysadmin/index.html.twig',array(
 	));
 
 
