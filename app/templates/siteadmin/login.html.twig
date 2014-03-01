@@ -1,0 +1,22 @@
+{% extends 'siteadmin/layout.html.twig' %}
+
+
+
+{% block content %}
+
+
+<form method="Post">
+	<label>
+		Site ID:
+		<input type="number" name="siteid">
+	</label>
+	<label>
+		Site password:
+		<input type="password" name="password">
+	</label>
+	<input type="submit" value="Submit">
+</form>
+	
+
+{% endblock %}
+

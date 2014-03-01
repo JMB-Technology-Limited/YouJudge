@@ -9,7 +9,7 @@ class Site {
 	protected $id;
 	protected $title;
 	protected $question;
-	protected $adminPassword;
+	protected $admin_password;
 	protected $api_password;
 	protected $type;
 	
@@ -18,7 +18,7 @@ class Site {
 			$this->id = isset($data['id']) ? $data['id'] : null;
 			$this->title = isset($data['title']) ? $data['title'] : null;
 			$this->question = isset($data['question']) ? $data['question'] : null;
-			$this->adminPassword = isset($data['adminPassword']) ? $data['adminPassword'] : null;
+			$this->admin_password= isset($data['admin_password']) ? $data['admin_password'] : null;
 			$this->api_password = isset($data['api_password']) ? $data['api_password'] : null;
 			$this->type = isset($data['question_type']) ? $data['question_type'] : null;
 		}
@@ -37,7 +37,7 @@ class Site {
 	}
 
 	public function getAdminPassword() {
-		return $this->adminPassword;
+		return $this->admin_password;
 	}
 
 	public function getApiPassword() {
