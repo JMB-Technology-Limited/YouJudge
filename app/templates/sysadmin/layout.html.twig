@@ -6,10 +6,13 @@
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<title>CodeAPictureJudge Sysadmin</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="{{ WebRoot }}css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="{{ WebRoot }}css/sysadmin.css" />
 		{% block htmlHeader %}{% endblock %}
 	</head>
 	<body>
 		<div id="Header">
+			<h1>CodeAPictureJudge</h1>
 			<ul id="Menu">
 				<li><a href="listsites.php">Sites</a></li>
 				<li><a href="newsite.php">[New]</a></li>
@@ -19,6 +22,7 @@
 			{% block content %}{% endblock %}
 		</div>
 		<div id="Footer">
+			&copy <a href="">JMB Technology Ltd</a> 2014
 		</div>
 	</body>
 </html>

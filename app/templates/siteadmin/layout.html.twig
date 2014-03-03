@@ -6,11 +6,13 @@
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<title>CodeAPictureJudge Admin</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="{{ WebRoot }}css/reset.css" />
 		<link rel="stylesheet" type="text/css" href="{{ WebRoot }}css/siteadmin.css" />
 		{% block htmlHeader %}{% endblock %}
 	</head>
 	<body>
 		<div id="Header">
+			<h1>{% if site %}{{ site.title }}{% else %}CodeAPictureJudge{% endif %}</h1>
 			<ul id="Menu">
 				<li><a href="index.php?siteid={{ site.id }}">Home</a></li>
 				<li><a href="listpictures.php?siteid={{ site.id }}">Show all Pictures</a></li>
@@ -20,6 +22,7 @@
 			{% block content %}{% endblock %}
 		</div>
 		<div id="Footer">
+			&copy <a href="">JMB Technology Ltd</a> 2014
 		</div>
 	</body>
 </html>
