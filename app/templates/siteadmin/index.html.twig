@@ -42,11 +42,11 @@
 		</table>
 	{% endif %}
 	
-	<h2>Pictures</h2>
+	<h2>Items</h2>
 
-	<ul class="pictures">
-		{% for picture in lastpictures %}
-			<li><img src="{{ WebRoot }}pictures/full/{{ picture.fileName }}" class="thumbnail"></li>
+	<ul class="items">
+		{% for item in lastitems %}
+			<li><img src="{{ WebRoot }}items/full/{{ item.fileName }}" class="thumbnail"></li>
 		{% endfor %}
 	</ul>
 	
@@ -55,7 +55,7 @@
 		<div class="entry">	
 			<label>
 				File:
-				<input type="file" id="picture" name="picture">
+				<input type="file" id="item" name="picture">
 			</label>
 		</div>
 		
@@ -75,7 +75,7 @@
 
 		
 		<div class="actions">	
-			<input type="submit" value="Upload Picture" class="">
+			<input type="submit" value="Upload Item" class="">
 		</div>
 		
 	</form>

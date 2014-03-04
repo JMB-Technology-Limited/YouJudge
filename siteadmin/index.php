@@ -9,7 +9,7 @@ require './bootstrap.php';
 
 $params = array(
 		'site'=>$site,
-		'lastpictures' => $app['picturerepository']->getLastAddedForSite($site,5),
+		'lastitems' => $app['itemrepository']->getLastAddedForSite($site,5),
 	);
 
 if ($site->getType() == 'answer') {

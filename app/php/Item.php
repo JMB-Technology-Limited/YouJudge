@@ -4,7 +4,7 @@
  * @link https://github.com/JMB-Technology-Limited/YouJudge
  * @license https://github.com/JMB-Technology-Limited/YouJudge/blob/master/LICENSE.txt BSD
  */
-class Picture {
+class Item {
 
 	protected $id;
 	protected $source_url;

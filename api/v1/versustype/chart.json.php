@@ -14,23 +14,23 @@ $limit = isset($indata['limit']) && $indata['limit'] ? $indata['limit'] : 30;
 $threshhold = isset($indata['threshhold']) && $indata['threshhold'] ? $indata['threshhold'] : 1;
 
 
-$pictures = $app['picturerepository']->getChartForTypeVersus($site, $threshhold, $order, $limit);
+$items = $app['itemrepository']->getChartForTypeVersus($site, $threshhold, $order, $limit);
 
 $out = array();
-foreach($pictures as $picturedata) {
+foreach($items as $itemdata) {
 	$out[] = array(
-		'picture'=>array(
-			'id'=>$picturedata['picture']->getId(),
-			'source_url'=>$picturedata['picture']->getSourceUrl(),
-			'source_text'=>$picturedata['picture']->getSourceText(),
-			'url_full_size'=>$app['webenvironment']->getSiteRoot().'pictures/full/'.$picturedata['picture']->getFilename(),
+		'item'=>array(
+			'id'=>$itemdata['item']->getId(),
+			'source_url'=>$itemdata['item']->getSourceUrl(),
+			'source_text'=>$itemdata['item']->getSourceText(),
+			'url_full_size'=>$app['webenvironment']->getSiteRoot().'items/full/'.$itemdata['item']->getFilename(),
 		),
-		'votes_won'=>$picturedata['votes_won'],
-		'votes_total'=>$picturedata['votes_total']
+		'votes_won'=>$itemdata['votes_won'],
+		'votes_total'=>$itemdata['votes_total']
 	);
 }
 
-print json_encode(array('pictures'=>$out));
+print json_encode(array('items'=>$out));
 
 
 

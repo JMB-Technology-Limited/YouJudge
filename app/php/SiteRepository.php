@@ -57,41 +57,41 @@ class SiteRepository {
 	}
 	
 	public function getNextQuestionForTypeAnswer(Site $site) {
-		$stat = $this->db->prepare("SELECT * FROM picture ".
-				"JOIN picture_in_site ON picture_in_site.picture_id = picture.id ".
-				"WHERE picture.removed_at IS NULL AND picture_in_site.removed_at IS NULL ".
-				"AND picture_in_site.site_id = :site_id ".
+		$stat = $this->db->prepare("SELECT * FROM item ".
+				"JOIN item_in_site ON item_in_site.item_id = item.id ".
+				"WHERE item.removed_at IS NULL AND item_in_site.removed_at IS NULL ".
+				"AND item_in_site.site_id = :site_id ".
 				"ORDER BY rand()");
 		$stat->execute(array('site_id'=>$site->getId()));
 		if ($stat->rowCount() > 0) {
 			return array(
-				'picture'=>new Picture($stat->fetch())
+				'item'=>new Item($stat->fetch())
 			);
 		}
 	}
 	
 	public function getNextQuestionForTypeVersus(Site $site) {
-		$stat = $this->db->prepare("SELECT * FROM picture ".
-				"JOIN picture_in_site ON picture_in_site.picture_id = picture.id ".
-				"WHERE picture.removed_at IS NULL AND picture_in_site.removed_at IS NULL ".
-				"AND picture_in_site.site_id = :site_id ".
+		$stat = $this->db->prepare("SELECT * FROM item ".
+				"JOIN item_in_site ON item_in_site.item_id = item.id ".
+				"WHERE item.removed_at IS NULL AND item_in_site.removed_at IS NULL ".
+				"AND item_in_site.site_id = :site_id ".
 				"ORDER BY rand()");
 		$stat->execute(array('site_id'=>$site->getId()));
 		if ($stat->rowCount() >= 2) {
 			return array(
-				'picture1'=>new Picture($stat->fetch()),
-				'picture2'=>new Picture($stat->fetch()),
+				'item1'=>new Item($stat->fetch()),
+				'item2'=>new Item($stat->fetch()),
 			);
 		}
 	}
 	
-	public function castVoteForTypeAnswer(Site $site, Picture $picture, 
+	public function castVoteForTypeAnswer(Site $site, Item $item, 
 			QuestionAnswer $questionanswer,$useragent, $ip) {
 		
-		$stat = $this->db->prepare("INSERT INTO vote_answer (picture_id,question_answer_id,ip,useragent,created_at) ".
-				" VALUES (:picture_id,:question_answer_id,:ip,:useragent,:created_at)");
+		$stat = $this->db->prepare("INSERT INTO vote_answer (item_id,question_answer_id,ip,useragent,created_at) ".
+				" VALUES (:item_id,:question_answer_id,:ip,:useragent,:created_at)");
 		$stat->execute(array(
-			'picture_id'=>$picture->getId(),
+			'item_id'=>$item->getId(),
 			'question_answer_id'=>$questionanswer->getId(),
 			'ip'=>$ip,
 			'useragent'=>substr($useragent,0,250),
@@ -100,15 +100,15 @@ class SiteRepository {
 		
 	}
 	
-	public function getAndCacheVoteStatsForPictureForTypeAnswer(Site $site, Picture $picture) {
-		$stat = $this->db->prepare("SELECT question_answer.*, COUNT(vote_answer.picture_id) AS c  ".
+	public function getAndCacheVoteStatsForItemForTypeAnswer(Site $site, Item $item) {
+		$stat = $this->db->prepare("SELECT question_answer.*, COUNT(vote_answer.item_id) AS c  ".
 				"FROM question_answer ".
-				"LEFT JOIN vote_answer ON vote_answer.question_answer_id = question_answer.id AND vote_answer.picture_id = :picture_id ".
+				"LEFT JOIN vote_answer ON vote_answer.question_answer_id = question_answer.id AND vote_answer.item_id = :item_id ".
 				"WHERE question_answer.site_id=:site_id  ".
 				"GROUP BY question_answer.id");
 		$stat->execute(array(
 			'site_id'=>$site->getId(),
-			'picture_id'=>$picture->getId()
+			'item_id'=>$item->getId()
 		));
 		$out = array();
 		$totalvotes = 0;
@@ -122,14 +122,14 @@ class SiteRepository {
 			$totalvotes += $data['c'];
 			$votes[$data['id']] = $data['c'];
 		}
-		$statCache = $this->db->prepare("INSERT INTO picture_answer_cache ".
-				"(picture_id,question_answer_id,votes_won,votes_total,votes_won_percentage) ".
-				"VALUES (:picture_id,:question_answer_id,:votes_won,:votes_total,:votes_won_percentage) ".
+		$statCache = $this->db->prepare("INSERT INTO item_answer_cache ".
+				"(item_id,question_answer_id,votes_won,votes_total,votes_won_percentage) ".
+				"VALUES (:item_id,:question_answer_id,:votes_won,:votes_total,:votes_won_percentage) ".
 				"on duplicate key update votes_won=values(votes_won), ".
 				"votes_total=values(votes_total), votes_won_percentage=values(votes_won_percentage)");
 		foreach($votes as $id=>$votes) {
 			$statCache->execute(array(
-				'picture_id'=>$picture->getId(),
+				'item_id'=>$item->getId(),
 				'question_answer_id'=>$id,
 				'votes_won'=>$votes,
 				'votes_total'=>$totalvotes,
@@ -140,14 +140,14 @@ class SiteRepository {
 		return $out;		
 	}
 
-	public function castVoteForTypeVersus(Site $site, Picture $winningPicture, Picture $losingPicture, $useragent, $ip) {
+	public function castVoteForTypeVersus(Site $site, Item $winningItem, Item $losingItem, $useragent, $ip) {
 		
-		$stat = $this->db->prepare("INSERT INTO vote_versus (site_id,winning_picture_id,losing_picture_id,ip,useragent,created_at) ".
-				" VALUES (:site_id,:winning_picture_id,:losing_picture_id,:ip,:useragent,:created_at)");
+		$stat = $this->db->prepare("INSERT INTO vote_versus (site_id,winning_item_id,losing_item_id,ip,useragent,created_at) ".
+				" VALUES (:site_id,:winning_item_id,:losing_item_id,:ip,:useragent,:created_at)");
 		$stat->execute(array(
 			'site_id'=>$site->getId(),
-			'winning_picture_id'=>$winningPicture->getId(),
-			'losing_picture_id'=>$losingPicture->getId(),
+			'winning_item_id'=>$winningItem->getId(),
+			'losing_item_id'=>$losingItem->getId(),
 			'ip'=>$ip,
 			'useragent'=>substr($useragent,0,250),
 			'created_at'=>$this->timesource->getFormattedForDataBase(),
@@ -155,38 +155,38 @@ class SiteRepository {
 		
 	}
 	
-	public function getAndCacheVoteStatsForPictureForTypeVersus(Site $site, Picture $picture) {
+	public function getAndCacheVoteStatsForItemForTypeVersus(Site $site, Item $item) {
 		
-		$statWinning = $this->db->prepare("SELECT COUNT(winning_picture_id) AS c  ".
+		$statWinning = $this->db->prepare("SELECT COUNT(winning_item_id) AS c  ".
 				"FROM vote_versus ".
-				"WHERE site_id=:site_id  AND winning_picture_id=:picture_id ".
-				"GROUP BY vote_versus.winning_picture_id");
+				"WHERE site_id=:site_id  AND winning_item_id=:item_id ".
+				"GROUP BY vote_versus.winning_item_id");
 		$statWinning->execute(array(
 			'site_id'=>$site->getId(),
-			'picture_id'=>$picture->getId()
+			'item_id'=>$item->getId()
 		));
 		$data = $statWinning->fetch();
 		$winningVotes = $data ? $data['c'] : 0;
 		
 		
-		$statLosing = $this->db->prepare("SELECT COUNT(losing_picture_id) AS c  ".
+		$statLosing = $this->db->prepare("SELECT COUNT(losing_item_id) AS c  ".
 				"FROM vote_versus ".
-				"WHERE site_id=:site_id  AND losing_picture_id=:picture_id ".
-				"GROUP BY vote_versus.losing_picture_id");
+				"WHERE site_id=:site_id  AND losing_item_id=:item_id ".
+				"GROUP BY vote_versus.losing_item_id");
 		$statLosing->execute(array(
 			'site_id'=>$site->getId(),
-			'picture_id'=>$picture->getId()
+			'item_id'=>$item->getId()
 		));
 		$data = $statLosing->fetch();
 		$losingVotes = $data ? $data['c'] : 0;
 		
-		$statCache = $this->db->prepare("INSERT INTO picture_versus_cache ".
-				"(picture_id,site_id,votes_won,votes_total,votes_won_percentage) ".
-				"VALUES (:picture_id,:site_id,:votes_won,:votes_total,:votes_won_percentage) ".
+		$statCache = $this->db->prepare("INSERT INTO item_versus_cache ".
+				"(item_id,site_id,votes_won,votes_total,votes_won_percentage) ".
+				"VALUES (:item_id,:site_id,:votes_won,:votes_total,:votes_won_percentage) ".
 				"on duplicate key update votes_won=values(votes_won), ".
 				"votes_total=values(votes_total), votes_won_percentage=values(votes_won_percentage)");
 		$statCache->execute(array(
-			'picture_id'=>$picture->getId(),
+			'item_id'=>$item->getId(),
 			'site_id'=>$site->getId(),
 			'votes_won'=>$winningVotes,
 			'votes_total'=>$winningVotes+$losingVotes,

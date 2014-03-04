@@ -11,17 +11,17 @@ $qdata = $app['siterepository']->getNextQuestionForTypeVersus($site);
 
 if ($qdata) {
 	print json_encode(array(
-		'picture1'=>array(
-			'id'=>$qdata['picture1']->getId(),
-			'source_url'=>$qdata['picture1']->getSourceUrl(),
-			'source_text'=>$qdata['picture1']->getSourceText(),
-			'url_full_size'=>$app['webenvironment']->getSiteRoot().'pictures/full/'.$qdata['picture1']->getFilename(),
+		'item1'=>array(
+			'id'=>$qdata['item1']->getId(),
+			'source_url'=>$qdata['item1']->getSourceUrl(),
+			'source_text'=>$qdata['item1']->getSourceText(),
+			'url_full_size'=>$app['webenvironment']->getSiteRoot().'items/full/'.$qdata['item1']->getFilename(),
 		),
-		'picture2'=>array(
-			'id'=>$qdata['picture2']->getId(),
-			'source_url'=>$qdata['picture2']->getSourceUrl(),
-			'source_text'=>$qdata['picture2']->getSourceText(),
-			'url_full_size'=>$app['webenvironment']->getSiteRoot().'pictures/full/'.$qdata['picture2']->getFilename(),
+		'item2'=>array(
+			'id'=>$qdata['item2']->getId(),
+			'source_url'=>$qdata['item2']->getSourceUrl(),
+			'source_text'=>$qdata['item2']->getSourceText(),
+			'url_full_size'=>$app['webenvironment']->getSiteRoot().'items/full/'.$qdata['item2']->getFilename(),
 		)
 	));
 	

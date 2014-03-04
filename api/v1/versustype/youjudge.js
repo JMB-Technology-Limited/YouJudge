@@ -43,7 +43,7 @@ function youjudgeGetNextQuestion() {
 }
 
 
-function youjudgeVote(winningpictureid, losingpictureid) {
+function youjudgeVote(winningitemid, losingitemid) {
 	var request = new XMLHttpRequest;
 	request.open('POST', youjudgeURL+'/api/v1/versustype/vote.json.php?siteid='+youjudgeSiteId+"&siteapipassword="+youjudgeSiteAPIPassword, true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -58,7 +58,7 @@ function youjudgeVote(winningpictureid, losingpictureid) {
 		}
 	  }
 	}
-	request.send("winningpictureid="+parseInt(winningpictureid)+"&losingpictureid="+parseInt(losingpictureid));
+	request.send("winningitemid="+parseInt(winningitemid)+"&losingitemid="+parseInt(losingitemid));
 	request = null;
 }
 

@@ -9,10 +9,10 @@ require './bootstrap.php';
 
 $params = array(
 		'site'=>$site,
-		'lastpictures' => $app['picturerepository']->getLastAddedForSite($site,5000),
+		'lastitems' => $app['itemrepository']->getLastAddedForSite($site,5000),
 	);
 
 
-print $app['twig']->render('siteadmin/listpictures.html.twig',$params);
+print $app['twig']->render('siteadmin/listitems.html.twig',$params);
 
 

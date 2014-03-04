@@ -1,37 +1,37 @@
 function youjudgeStartGotData(data) {
 	// load first question!
-	nextPicture();
+	nextItem();
 }
 
-function nextPicture() {
+function nextItem() {
 	youjudgeGetNextQuestion();
 }
 
 function youjudgeGetNextQuestionGotData(data) {
-	picture1Element.src = data.picture1.url_full_size;
-	picture2Element.src = data.picture2.url_full_size;
-	picture1Id = data.picture1.id;
-	picture2Id = data.picture2.id;
+	item1Element.src = data.item1.url_full_size;
+	item2Element.src = data.item2.url_full_size;
+	item1Id = data.item1.id;
+	item2Id = data.item2.id;
 }
 
-function votePicture1() {
-	youjudgeVote(picture1Id,picture2Id);
+function voteItem1() {
+	youjudgeVote(item1Id,item2Id);
 }
 
-function votePicture2() {
-	youjudgeVote(picture2Id,picture1Id);
+function voteItem2() {
+	youjudgeVote(item2Id,item1Id);
 }
 
 function youjudgeVoteGotData(data) {
-	nextPicture();
+	nextItem();
 }
 
 
 // set up page and some variables
-var picture1Element = document.getElementById("Picture1");
-var picture2Element = document.getElementById("Picture2");
-var picture1Id;
-var picture2Id;
+var item1Element = document.getElementById("Picture1");
+var item2Element = document.getElementById("Picture2");
+var item1Id;
+var item2Id;
 // start loading data on this quiz
 youjudgeStart('http://localhost:20155/',2,'apipassword');
 

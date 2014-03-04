@@ -7,12 +7,12 @@ require './bootstrap.php';
  * @license https://github.com/JMB-Technology-Limited/YouJudge/blob/master/LICENSE.txt BSD
  */
 
-$pictureid = $_POST['pictureid'];
+$itemid = $_POST['itemid'];
 $voteidx = $_POST['idx'];
 
-$picture = $app['picturerepository']->getByIdInSite($pictureid, $site);
-if (!$picture) {
-	die("404 no picture");
+$item = $app['itemrepository']->getByIdInSite($itemid, $site);
+if (!$item) {
+	die("404 no item");
 }
 
 $questionanswer = $app['questionanswerrepository']->loadByIdxForSite($voteidx, $site);
@@ -20,10 +20,10 @@ if (!$questionanswer) {
 	die("404 no question");
 }
 
-$app['siterepository']->castVoteForTypeAnswer($site, $picture, 
+$app['siterepository']->castVoteForTypeAnswer($site, $item, 
 		$questionanswer, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
 
 
-$stats = $app['siterepository']->getAndCacheVoteStatsForPictureForTypeAnswer($site, $picture, true);
+$stats = $app['siterepository']->getAndCacheVoteStatsForItemForTypeAnswer($site, $item, true);
 
 print json_encode(array('stats'=>$stats));

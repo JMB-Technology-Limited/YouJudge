@@ -7,26 +7,26 @@ require './bootstrap.php';
  * @license https://github.com/JMB-Technology-Limited/YouJudge/blob/master/LICENSE.txt BSD
  */
 
-$winningpictureid = $_POST['winningpictureid'];
-$losingpictureid = $_POST['losingpictureid'];
+$winningitemid = $_POST['winningitemid'];
+$losingitemid = $_POST['losingitemid'];
 
-$winningpicture = $app['picturerepository']->getByIdInSite($winningpictureid, $site);
-if (!$winningpicture) {
-	die("404 no picture");
+$winningitem = $app['itemrepository']->getByIdInSite($winningitemid, $site);
+if (!$winningitem) {
+	die("404 no item");
 }
 
-$losingpicture = $app['picturerepository']->getByIdInSite($losingpictureid, $site);
-if (!$losingpicture) {
-	die("404 no picture");
+$losingitem = $app['itemrepository']->getByIdInSite($losingitemid, $site);
+if (!$losingitem) {
+	die("404 no item");
 }
 
 
-$app['siterepository']->castVoteForTypeVersus($site, $winningpicture, $losingpicture,
+$app['siterepository']->castVoteForTypeVersus($site, $winningitem, $losingitem,
 		$_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
 
 
-$winningstats = $app['siterepository']->getAndCacheVoteStatsForPictureForTypeVersus($site, $winningpicture, true);
-$losingstats = $app['siterepository']->getAndCacheVoteStatsForPictureForTypeVersus($site, $losingpicture, true);
+$winningstats = $app['siterepository']->getAndCacheVoteStatsForItemForTypeVersus($site, $winningitem, true);
+$losingstats = $app['siterepository']->getAndCacheVoteStatsForItemForTypeVersus($site, $losingitem, true);
 
-print json_encode(array('stats'=>array('winning_picture'=>$winningstats,'losing_picture'=>$losingstats)));
+print json_encode(array('stats'=>array('winning_item'=>$winningstats,'losing_item'=>$losingstats)));
 
