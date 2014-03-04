@@ -36,10 +36,29 @@ CREATE TABLE item_in_site (
 	item_id INT UNSIGNED NOT NULL,
 	created_at DATETIME NOT NULL,
 	removed_at DATETIME NULL,
-	PRIMARY KEY (site_id, item_Id)
+	PRIMARY KEY (site_id, item_id)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE item_in_site ADD CONSTRAINT item_in_site_site_id  FOREIGN KEY (site_id) REFERENCES site(id);
-ALTER TABLE item_in_site ADD CONSTRAINT item_in_site_item_Id  FOREIGN KEY (item_Id) REFERENCES item(id);
+ALTER TABLE item_in_site ADD CONSTRAINT item_in_site_item_Id  FOREIGN KEY (item_id) REFERENCES item(id);
+
+CREATE TABLE item_set (
+	id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	title VARCHAR(255) NOT NULL,
+	created_at DATETIME NOT NULL,
+	removed_at DATETIME NULL,
+	PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE item_in_item_set (
+	item_id INT UNSIGNED NOT NULL,
+	item_set_id INT UNSIGNED NOT NULL,
+	created_at DATETIME NOT NULL,
+	removed_at DATETIME NULL,
+	PRIMARY KEY (item_id, item_set_id)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE item_in_item_set ADD CONSTRAINT item_in_item_set_item_id  FOREIGN KEY (item_id) REFERENCES item(id);
+ALTER TABLE item_in_item_set ADD CONSTRAINT item_in_item_set_item_set_id  FOREIGN KEY (item_set_id) REFERENCES item_set(id);
+
 
 CREATE TABLE vote_versus (
 	site_id INT UNSIGNED NOT NULL,
