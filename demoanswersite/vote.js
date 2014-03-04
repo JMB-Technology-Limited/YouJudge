@@ -1,4 +1,4 @@
-function codeAPictureJudgeStartGotData(data) {
+function youjudgeStartGotData(data) {
 	// add Buttons for answers
 	var html = '';
 	for(i in data.answers) {
@@ -20,10 +20,10 @@ function codeAPictureJudgeStartGotData(data) {
 }
 
 function clickAnswer(idx){
-	codeAPictureJudgeVote(pictureId, idx);
+	youjudgeVote(pictureId, idx);
 }
 
-function codeAPictureJudgeVoteGotData(data) {
+function youjudgeVoteGotData(data) {
 	var html = '';
 	for(i in data.stats) {
 		html += '<p>'+escapeHTML(data.stats[i].answer)+' has '+data.stats[i].votes+' votes.</p>'
@@ -33,10 +33,10 @@ function codeAPictureJudgeVoteGotData(data) {
 }
 
 function nextPicture() {
-	codeAPictureJudgeGetNextQuestion();
+	youjudgeGetNextQuestion();
 }
 
-function codeAPictureJudgeGetNextQuestionGotData(data) {
+function youjudgeGetNextQuestionGotData(data) {
 	pictureElement.src = data.picture.url_full_size;
 	pictureId = data.picture.id;
 }
@@ -45,5 +45,5 @@ function codeAPictureJudgeGetNextQuestionGotData(data) {
 var pictureElement = document.getElementById("Picture");
 var pictureId;
 // start loading data on this quiz
-codeAPictureJudgeStart('http://localhost:20155/',1,'apipassword');
+youjudgeStart('http://localhost:20155/',1,'apipassword');
 

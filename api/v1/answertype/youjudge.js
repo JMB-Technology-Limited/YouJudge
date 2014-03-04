@@ -1,19 +1,19 @@
-var codeAPictureJudgeURL;
-var codeAPictureSiteId;
-var codeAPictureSiteAPIPassword;
+var youjudgeURL;
+var youjudgeSiteId;
+var youjudgeSiteAPIPassword;
 
-function codeAPictureJudgeStart(url, siteid, siteapipassword) {
-	codeAPictureJudgeURL = url;
-	codeAPictureSiteId = siteid;
-	codeAPictureSiteAPIPassword = siteapipassword;
+function youjudgeStart(url, siteid, siteapipassword) {
+	youjudgeURL = url;
+	youjudgeSiteId = siteid;
+	youjudgeSiteAPIPassword = siteapipassword;
 	var request = new XMLHttpRequest;
-	request.open('GET', url+'/api/v1/answertype/start.json.php?siteid='+siteid+"&siteapipassword="+codeAPictureSiteAPIPassword, true);
+	request.open('GET', url+'/api/v1/answertype/start.json.php?siteid='+siteid+"&siteapipassword="+youjudgeSiteAPIPassword, true);
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
 			data = JSON.parse(this.responseText);
-			if (typeof(codeAPictureJudgeStartGotData) == "function") {
-				codeAPictureJudgeStartGotData(data);
+			if (typeof(youjudgeStartGotData) == "function") {
+				youjudgeStartGotData(data);
 			}
 		} else {
 		}
@@ -23,15 +23,15 @@ function codeAPictureJudgeStart(url, siteid, siteapipassword) {
 	request = null;
 }
 
-function codeAPictureJudgeGetNextQuestion() {
+function youjudgeGetNextQuestion() {
 	var request = new XMLHttpRequest;
-	request.open('GET', codeAPictureJudgeURL+'/api/v1/answertype/get.json.php?siteid='+codeAPictureSiteId+"&siteapipassword="+codeAPictureSiteAPIPassword, true);
+	request.open('GET', youjudgeURL+'/api/v1/answertype/get.json.php?siteid='+youjudgeSiteId+"&siteapipassword="+youjudgeSiteAPIPassword, true);
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
 			data = JSON.parse(this.responseText);
-			if (typeof(codeAPictureJudgeGetNextQuestionGotData) == "function") {
-				codeAPictureJudgeGetNextQuestionGotData(data);
+			if (typeof(youjudgeGetNextQuestionGotData) == "function") {
+				youjudgeGetNextQuestionGotData(data);
 			}
 		} else {
 		}
@@ -41,16 +41,16 @@ function codeAPictureJudgeGetNextQuestion() {
 	request = null;
 }
 
-function codeAPictureJudgeVote(pictureid, idx) {
+function youjudgeVote(pictureid, idx) {
 	var request = new XMLHttpRequest;
-	request.open('POST', codeAPictureJudgeURL+'/api/v1/answertype/vote.json.php?siteid='+codeAPictureSiteId+"&siteapipassword="+codeAPictureSiteAPIPassword, true);
+	request.open('POST', youjudgeURL+'/api/v1/answertype/vote.json.php?siteid='+youjudgeSiteId+"&siteapipassword="+youjudgeSiteAPIPassword, true);
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	request.onreadystatechange = function() {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
 			data = JSON.parse(this.responseText);
-			if (typeof(codeAPictureJudgeVoteGotData) == "function") {
-				codeAPictureJudgeVoteGotData(data);
+			if (typeof(youjudgeVoteGotData) == "function") {
+				youjudgeVoteGotData(data);
 			}
 		} else {
 		}
@@ -60,8 +60,8 @@ function codeAPictureJudgeVote(pictureid, idx) {
 	request = null;
 }
 
-function codeAPictureJudgeChart(idx, order, threshhold, limit) {
-	var url = codeAPictureJudgeURL+'/api/v1/answertype/chart.json.php?siteid='+codeAPictureSiteId+"&siteapipassword="+codeAPictureSiteAPIPassword+'&idx='+idx;
+function youjudgeChart(idx, order, threshhold, limit) {
+	var url = youjudgeURL+'/api/v1/answertype/chart.json.php?siteid='+youjudgeSiteId+"&siteapipassword="+youjudgeSiteAPIPassword+'&idx='+idx;
 	if (threshhold) url += '&threshhold='+threshhold;
 	if (limit) url += '&limit='+limit;
 	if (order) url += '&order='+order;
@@ -71,8 +71,8 @@ function codeAPictureJudgeChart(idx, order, threshhold, limit) {
 	  if (this.readyState === 4){
 		if (this.status >= 200 && this.status < 400){
 			data = JSON.parse(this.responseText);
-			if (typeof(codeAPictureJudgeChartGotData) == "function") {
-				codeAPictureJudgeChartGotData(data);
+			if (typeof(youjudgeChartGotData) == "function") {
+				youjudgeChartGotData(data);
 			}
 		} else {
 		}

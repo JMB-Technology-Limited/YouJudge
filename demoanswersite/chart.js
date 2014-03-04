@@ -1,9 +1,9 @@
 
-function codeAPictureJudgeStartGotData(data) {
-	codeAPictureJudgeChart(idx);
+function youjudgeStartGotData(data) {
+	youjudgeChart(idx);
 }
 
-function codeAPictureJudgeChartGotData(data) {
+function youjudgeChartGotData(data) {
 	var html = '';
 	for(i in data.pictures) {
 		html += '<li><img src="'+data.pictures[i].picture.url_full_size+'" class="ChartImage">'+
@@ -23,7 +23,7 @@ location.search.substr(1).split("&").forEach(function(item) {queryDict[item.spli
 var idx = queryDict['idx'];
 
 // Start & load Chart
-codeAPictureJudgeStart('http://localhost:20155/',1,'apipassword');
+youjudgeStart('http://localhost:20155/',1,'apipassword');
 
 
 

@@ -1,13 +1,13 @@
-function codeAPictureJudgeStartGotData(data) {
+function youjudgeStartGotData(data) {
 	// load first question!
 	nextPicture();
 }
 
 function nextPicture() {
-	codeAPictureJudgeGetNextQuestion();
+	youjudgeGetNextQuestion();
 }
 
-function codeAPictureJudgeGetNextQuestionGotData(data) {
+function youjudgeGetNextQuestionGotData(data) {
 	picture1Element.src = data.picture1.url_full_size;
 	picture2Element.src = data.picture2.url_full_size;
 	picture1Id = data.picture1.id;
@@ -15,14 +15,14 @@ function codeAPictureJudgeGetNextQuestionGotData(data) {
 }
 
 function votePicture1() {
-	codeAPictureJudgeVote(picture1Id,picture2Id);
+	youjudgeVote(picture1Id,picture2Id);
 }
 
 function votePicture2() {
-	codeAPictureJudgeVote(picture2Id,picture1Id);
+	youjudgeVote(picture2Id,picture1Id);
 }
 
-function codeAPictureJudgeVoteGotData(data) {
+function youjudgeVoteGotData(data) {
 	nextPicture();
 }
 
@@ -33,5 +33,5 @@ var picture2Element = document.getElementById("Picture2");
 var picture1Id;
 var picture2Id;
 // start loading data on this quiz
-codeAPictureJudgeStart('http://localhost:20155/',2,'apipassword');
+youjudgeStart('http://localhost:20155/',2,'apipassword');
 

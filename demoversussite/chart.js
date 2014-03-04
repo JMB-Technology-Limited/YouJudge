@@ -1,9 +1,9 @@
 
-function codeAPictureJudgeStartGotData(data) {
-	codeAPictureJudgeChart(order);
+function youjudgeStartGotData(data) {
+	youjudgeChart(order);
 }
 
-function codeAPictureJudgeChartGotData(data) {
+function youjudgeChartGotData(data) {
 	var html = '';
 	for(i in data.pictures) {
 		html += '<li><img src="'+data.pictures[i].picture.url_full_size+'" class="ChartImage">'+
@@ -16,7 +16,7 @@ function codeAPictureJudgeChartGotData(data) {
 
 
 // Start & load Chart
-codeAPictureJudgeStart('http://localhost:20155/',2,'apipassword');
+youjudgeStart('http://localhost:20155/',2,'apipassword');
 
 
 
