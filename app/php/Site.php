@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @link https://github.com/JMB-Technology-Limited/CodeAPictureJudge
- * @license https://raw.github.com/JMB-Technology-Limited/CodeAPictureJudge/master/LICENSE.txt BSD
+ * @link https://github.com/JMB-Technology-Limited/YouJudge
+ * @license https://github.com/JMB-Technology-Limited/YouJudge/blob/master/LICENSE.txt BSD
  */
 class Site {
 

@@ -1,4 +1,4 @@
-CodeAPictureJudge
+YouJudge
 =================
 
 This is an educational tool.

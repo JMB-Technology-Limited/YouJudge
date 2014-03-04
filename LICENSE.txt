@@ -1,4 +1,4 @@
-CodeAPictureJudge License
+YouJudge License
 =========================
 
 Copyright (c) 2014, JMB Technology Ltd
