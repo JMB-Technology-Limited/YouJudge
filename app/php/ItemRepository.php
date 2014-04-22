@@ -18,7 +18,7 @@ class ItemRepository {
 		$this->timesource = $timesource;
 	}
 	
-	public function createFromWebUpload(Site $site, $localFileName, $remoteFileName, $sourceURL, $sourceText) {
+	public function createPictureFromWebUploadForSite(Site $site, $localFileName, $remoteFileName, $sourceURL, $sourceText) {
 		
 		$newfilename = basename($remoteFileName);
 		
@@ -47,6 +47,36 @@ class ItemRepository {
 			));
 	}
 	
+	
+	public function createPictureFromWebUploadForItemSet(ItemSet $itemset, $localFileName, $remoteFileName, $sourceURL, $sourceText) {
+		
+		$newfilename = basename($remoteFileName);
+		
+		while(file_exists(__DIR__.'/../../items/full/'.$newfilename)) {
+			$newfilename = mt_rand(1, 9999999).basename($remoteFileName);
+		}
+		
+		$stat = $this->db->prepare("INSERT INTO item (source_url, source_text, filename, created_at) ".
+				"VALUES (:source_url, :source_text, :filename, :created_at)");
+		$stat->execute(array(
+				'source_url'=>$sourceURL,
+				'source_text'=>$sourceText,
+				'filename'=>$newfilename,
+				'created_at'=>$this->timesource->getFormattedForDataBase()
+			));
+		$id = $this->db->lastInsertId();
+		
+		move_uploaded_file($localFileName, __DIR__.'/../../items/full/'.$newfilename);
+		
+		$stat = $this->db->prepare("INSERT INTO item_in_item_set (item_set_id,item_id,created_at) ".
+				"VALUES (:item_set_id,:item_id,:created_at)");
+		$stat->execute(array(
+				'item_set_id'=>$itemset->getId(),
+				'item_id'=>$id,
+				'created_at'=>$this->timesource->getFormattedForDataBase()
+			));
+	}
+	
 	public function getLastAddedForSite(Site $site, $count=5) {
 		$stat = $this->db->prepare("SELECT item.* FROM item ".
 				"JOIN item_in_site ON item_in_site.item_id = item.id ".
@@ -55,6 +85,23 @@ class ItemRepository {
 				"LIMIT ".intval($count));
 		$stat->execute(array(
 			'site_id'=>$site->getId(),
+		));
+		$out = array();
+		while($data = $stat->fetch()) {
+			$out[] = new Item($data);
+		}
+		return $out;		
+	}
+	
+	
+	public function getLastAddedForItemSet(ItemSet $itemset, $count=5) {
+		$stat = $this->db->prepare("SELECT item.* FROM item ".
+				"JOIN item_in_item_set ON item_in_item_set.item_id = item.id ".
+				"WHERE item_in_item_set.item_set_id = :item_set_id  AND item_in_item_set.removed_at IS NULL ".
+				"ORDER BY item_in_item_set.created_at DESC ".
+				"LIMIT ".intval($count));
+		$stat->execute(array(
+			'item_set_id'=>$itemset->getId(),
 		));
 		$out = array();
 		while($data = $stat->fetch()) {

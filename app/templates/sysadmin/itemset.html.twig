@@ -8,5 +8,44 @@
 <p>{{itemset.title}}</p>
 
 
+<ul class="items">
+	{% for item in lastitems %}
+		<li><img src="{{ WebRoot }}items/full/{{ item.fileName }}" class="thumbnail"></li>
+	{% endfor %}
+</ul>
+
+
+<form id="new-content-form" enctype="multipart/form-data" action="#" method="post">
+
+	<div class="entry">	
+		<label>
+			File:
+			<input type="file" id="item" name="picture">
+		</label>
+	</div>
+
+	<div class="entry">	
+		<label>
+			Source Text:
+			<input type="text" name="sourcetext">
+		</label>
+	</div>
+
+	<div class="entry">	
+		<label>
+			Source Web Page Address:
+			<input type="text" name="sourceurl">
+		</label>
+	</div>
+
+
+	<div class="actions">	
+		<input type="submit" value="Upload Item" class="">
+	</div>
+
+</form>
+
+
+
 {% endblock %}
 
