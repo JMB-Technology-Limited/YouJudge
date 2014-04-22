@@ -9,6 +9,8 @@ require __DIR__.'/QuestionAnswerRepository.php';
 require __DIR__.'/QuestionAnswer.php';
 require __DIR__.'/ItemRepository.php';
 require __DIR__.'/Item.php';
+require __DIR__.'/ItemSet.php';
+require __DIR__.'/ItemSetRepository.php';
 require __DIR__.'/WebEnvironment.php';
 require __DIR__.'/../vendor/autoload.php';
 
@@ -36,6 +38,9 @@ $app['questionanswerrepository'] = function($c) {
 };
 $app['itemrepository'] = function($c) {
 	return new ItemRepository($c['database'],$c['timesource']);
+};
+$app['itemsetrepository'] = function($c) {
+	return new ItemSetRepository($c['database'],$c['timesource']);
 };
 
 $app['twig'] = function($c) {

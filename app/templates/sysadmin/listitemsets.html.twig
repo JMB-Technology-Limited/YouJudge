@@ -1,0 +1,23 @@
+{% extends 'sysadmin/layout.html.twig' %}
+
+
+
+{% block content %}
+
+
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+		</tr>
+		{% for itemset in itemsets %}
+			<tr>
+				<td><a href="/sysadmin/itemset.php?itemsetid={{ itemset.id }}">{{ itemset.id }}</a></td>
+				<td><a href="/sysadmin/itemset.php?itemsetid={{ itemset.id }}">{{ itemset.title }}</a></td>
+			</tr>
+		{% endfor %}
+	</table>
+
+
+{% endblock %}
+
