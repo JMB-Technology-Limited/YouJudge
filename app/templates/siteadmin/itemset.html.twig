@@ -1,0 +1,28 @@
+{% extends 'siteadmin/layout.html.twig' %}
+
+
+
+{% block content %}
+
+
+	<p>{{itemset.title}}</p>
+
+
+	<ul class="items">
+		{% for item in lastitems %}
+			<li><img src="{{ WebRoot }}items/full/{{ item.fileName }}" class="thumbnail"></li>
+		{% endfor %}
+	</ul>
+
+
+	<form id="new-content-form" action="#" method="post">
+		<input type="hidden" name="add" value="yes">
+		
+		<div class="actions">	
+			<input type="submit" value="Add these to your question?" class="">
+		</div>
+
+	</form>
+	
+{% endblock %}
+

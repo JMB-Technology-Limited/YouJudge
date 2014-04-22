@@ -49,5 +49,25 @@ class ItemSetRepository {
 			));
 		return $this->db->lastInsertId();
 	}
+	
+	function addItemSetToSite(ItemSet $itemset, Site $site) {
+		$statInsert = $this->db->prepare("INSERT IGNORE INTO item_in_site (site_id,item_id,created_at) ".
+				"VALUES (:site_id,:item_id,:created_at)");
+		$statRead = $this->db->prepare("SELECT item.id FROM item ".
+				"JOIN item_in_item_set ON item_in_item_set.item_id = item.id ".
+				"WHERE item_in_item_set.item_set_id = :item_set_id  AND item_in_item_set.removed_at IS NULL ".
+				"ORDER BY item_in_item_set.created_at DESC ");
+		$statRead->execute(array(
+			'item_set_id'=>$itemset->getId(),
+		));
+		while($data = $statRead->fetch()) {
+			$statInsert->execute(array(
+				'site_id'=>$site->getId(),
+				'item_id'=>$data['id'],
+				'created_at'=>$this->timesource->getFormattedForDataBase(),
+			));
+		}
+	}
+	
 
 }

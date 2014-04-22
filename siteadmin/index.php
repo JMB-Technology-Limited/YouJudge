@@ -10,6 +10,7 @@ require './bootstrap.php';
 $params = array(
 		'site'=>$site,
 		'lastitems' => $app['itemrepository']->getLastAddedForSite($site,5),
+		'itemsets' => $app['itemsetrepository']->loadItemSets(),
 	);
 
 if ($site->getType() == 'answer') {
